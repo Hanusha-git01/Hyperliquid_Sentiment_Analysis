@@ -36,7 +36,7 @@ df_sentiment = pd.read_csv('bitcoin_sentiment.csv')
 
 
 # Convert Timestamps (Using 'ms' for the 13-digit Hyperliquid timestamps)
-df_trader['time'] = pd.to_datetime(df_trader['Timestamp'], unit='ms')
+df_trader['time'] = pd.to_datetime(df_trader['Timestamp'], unit='ms')# Correcting 13-digit Unix timestamp (milliseconds) to standard datetime.
 df_trader['trade_date'] = df_trader['time'].dt.date
 
 
@@ -79,13 +79,13 @@ print(performance_summary)
 # Create a multi-panel visualization
 fig, ax = plt.subplots(1, 2, figsize=(18, 6))
 
-# Chart 1: Average Profitability
+# Plot 1: Average Profitability
 sns.barplot(data=performance_summary, x='classification', y='Avg_PnL',
             hue='classification', palette='coolwarm', ax=ax[0], legend=False)
 ax[0].set_title('Average Profit/Loss by Market Sentiment', fontsize=15)
 ax[0].set_ylabel('USD Profit')
 
-# Chart 2: Trading Activity (Frequency)
+# Plot 2: Trading Activity (Frequency)
 sns.barplot(data=performance_summary, x='classification', y='Trade_Count',
             hue='classification', palette='magma', ax=ax[1], legend=False)
 ax[1].set_title('Frequency of Trading by Market Sentiment', fontsize=15)
